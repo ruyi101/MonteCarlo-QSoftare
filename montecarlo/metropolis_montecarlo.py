@@ -7,6 +7,8 @@ import networkx as nx
 import random
 import scipy
 import math
+from .BitString import BitString
+from .IsingHamiltonian import IsingHamiltonian
 
 def metropolis_montecarlo(ham, conf, T=1, nsweep=8000, nburn=2000):
     conf = ham.mc_step(conf, T, nburn)

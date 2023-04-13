@@ -7,6 +7,7 @@ import networkx as nx
 import random
 import scipy
 import math
+from .BitString import BitString
 
 class IsingHamiltonian:
     def __init__(self, G: nx.Graph, mu) -> None:
