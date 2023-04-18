@@ -109,3 +109,5 @@ class IsingHamiltonian:
                         conf.flip(site)
                     else:
                         pass
+                    
+                    

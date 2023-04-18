@@ -10,14 +10,14 @@ import math
 from .BitString import BitString
 from .IsingHamiltonian import IsingHamiltonian
 
-def metropolis_montecarlo(ham, conf, T=1, nsweep=8000, nburn=2000):
-    conf = ham.mc_step(conf, T, nburn)
+def metropolis_montecarlo(ham, conf, T=1, nsweep=8000, nburn=2000, mode = "fast_"):
+    conf = ham.mc_step(conf, T, nburn, mode = mode)
     E = np.zeros(nsweep)
     M = np.zeros(nsweep)
     E_sq = np.zeros(nsweep)
     M_sq = np.zeros(nsweep)
     for step in range(nsweep):
-        conf = ham.mc_step(conf, T)
+        conf = ham.mc_step(conf, T, mode = mode)
         
         Ei = ham.energy(conf)
 
