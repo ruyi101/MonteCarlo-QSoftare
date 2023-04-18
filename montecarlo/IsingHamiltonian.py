@@ -67,11 +67,13 @@ class IsingHamiltonian:
             #     E_del += 2 * w
             
             E_del -= 2 * (2 * conf.config[flip_spin] - 1)*(2 * conf.config[link[0]] - 1) * link[1]
+        return E_del
     
     def mc_step(self, conf, T=1, steps=1, mode = "fast_"):
         if mode == "slow_":
             for step in range(steps):
                 for site in range(conf.N):
+                # for site in range(len(conf.config)):
                     E1 = self.energy(conf)
                     conf.flip(site)
                     E2 = self.energy(conf)
@@ -93,6 +95,7 @@ class IsingHamiltonian:
         elif mode == "fast_":
             for step in range(steps):
                 for site in range(conf.N):
+                # for site in range(len(conf.config)):
                     delta_E = self.energy_diff(conf, site)
                     W = np.exp(-delta_E/T)
                     # print(delta_E)
@@ -109,5 +112,6 @@ class IsingHamiltonian:
                         conf.flip(site)
                     else:
                         pass
+        return conf
                     
                     
