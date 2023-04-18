@@ -55,27 +55,57 @@ class IsingHamiltonian:
         
         return E, M, HC, MS
     
-    def mc_step(self, conf, T=1, steps=1):
-        for step in range(steps):
-            for site in range(conf.N):
-                E1 = self.energy(conf)
-                conf.flip(site)
-                E2 = self.energy(conf)
-                delta_E = E2 - E1
-                W = np.exp(-delta_E/T)
-                accept = True
-                if delta_E >0:
-                    r = random.uniform(0, 1)
-                    if r<W:
-                        accept = True
-                    else:
-                        accept = False
-                
-                
-                if accept:
-                    pass
-                else:
+    
+    
+    def energy_diff(self, conf, flip_spin):
+        E_del = 0
+        for link in self.graph[flip_spin]:
+            E_del -= 2 * (2 * conf.config[flip_spin] - 1) * self.mu[flip_spin]
+            # if conf.config[flip_spin] == conf.config[node]:
+            #     E_del -=  2 * w
+            # else:
+            #     E_del += 2 * w
+            
+            E_del -= 2 * (2 * conf.config[flip_spin] - 1)*(2 * conf.config[link[0]] - 1) * link[1]
+    
+    def mc_step(self, conf, T=1, steps=1, mode = "fast_"):
+        if mode == "slow_":
+            for step in range(steps):
+                for site in range(conf.N):
+                    E1 = self.energy(conf)
                     conf.flip(site)
-                
+                    E2 = self.energy(conf)
+                    delta_E = E2 - E1
+                    W = np.exp(-delta_E/T)
+                    accept = True
+                    if delta_E >0:
+                        r = random.uniform(0, 1)
+                        if r<W:
+                            accept = True
+                        else:
+                            accept = False
                     
-        return conf
+                    
+                    if accept:
+                        pass
+                    else:
+                        conf.flip(site)
+        elif mode == "fast_":
+            for step in range(steps):
+                for site in range(conf.N):
+                    delta_E = self.energy_diff(conf, site)
+                    W = np.exp(-delta_E/T)
+                    # print(delta_E)
+                    accept = True
+                    if delta_E >0:
+                        r = random.uniform(0, 1)
+                        if r<W:
+                            accept = True
+                        else:
+                            accept = False
+                    
+                    
+                    if accept:
+                        conf.flip(site)
+                    else:
+                        pass
