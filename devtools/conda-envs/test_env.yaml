@@ -10,7 +10,6 @@ dependencies:
   - pip
   - numpy
   - matplotlib
-  - random
   - networkx
   - scipy
 
