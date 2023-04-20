@@ -8,6 +8,11 @@ dependencies:
     # Base depends
   - python
   - pip
+  - numpy
+  - matplotlib
+  - random
+  - networkx
+  - scipy
 
     # Testing
   - pytest
