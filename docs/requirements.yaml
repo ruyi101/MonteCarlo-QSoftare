@@ -9,6 +9,6 @@ dependencies:
   - matplotlib
 
     # Pip-only installs
-  #- pip:
+  - pip:
      - sphinx-autoapi
 
