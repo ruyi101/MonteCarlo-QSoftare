@@ -11,5 +11,5 @@ dependencies:
 
     # Pip-only installs
   #- pip:
-    - sphinx-autoapi
+     - sphinx-autoapi
 
