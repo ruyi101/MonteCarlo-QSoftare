@@ -8,6 +8,7 @@ dependencies:
   - numpy
   - matplotlib
   - networkx
+  - scipy
 
     # Pip-only installs
   - pip:
