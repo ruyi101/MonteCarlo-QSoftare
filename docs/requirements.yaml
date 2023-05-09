@@ -7,6 +7,7 @@ dependencies:
     # Package depends
   - numpy
   - matplotlib
+  - networkx
 
     # Pip-only installs
   - pip:
